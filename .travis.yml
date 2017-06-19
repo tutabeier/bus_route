@@ -1,0 +1,6 @@
+language: java
+
+script:
+  - ./gradlew unitTests
+  - ./gradlew integrationTests
+  - ./gradlew endToEndTests
