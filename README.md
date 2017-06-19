@@ -1,6 +1,5 @@
 ## Continuous Integration
 [![Build Status](https://travis-ci.org/tutabeier/bus_route.svg?branch=master)](https://travis-ci.org/tutabeier/bus_route)
-[![Build Status](https://travis-ci.org/tutabeier/bus_route.svg?branch=master)](https://travis-ci.org/tutabeier/bus_route)
 
 Build history in [Travis CI](https://travis-ci.org/tutabeier/bus_route/).
 
