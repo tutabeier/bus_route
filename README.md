@@ -25,7 +25,7 @@ $ ./gradlew unitTests
 $ ./gradlew integrationTests
 ```
 
-### End to Endtests
+### End to End tests
 ```sh
 $ ./gradlew endToEndTests
 ```
