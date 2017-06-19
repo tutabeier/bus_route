@@ -1,0 +1,85 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'bus-route-challenge'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+    unitTests {
+        java.srcDir file('src/test/java/busroute/unit')
+        resources.srcDir file('src/test/resources')
+    }
+
+    integrationTests {
+        java.srcDir file('src/test/java/busroute/integration')
+        resources.srcDir file('src/test/resources')
+    }
+
+    endToEndTests {
+        java.srcDir file('src/test/java/busroute/endtoend')
+        resources.srcDir file('src/test/resources')
+    }
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.4.RELEASE'
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.3'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.4.RELEASE'
+
+    unitTestsCompile sourceSets.main.output
+    unitTestsCompile configurations.testCompile
+    unitTestsCompile sourceSets.test.output
+    unitTestsCompile configurations.testRuntime
+
+    integrationTestsCompile sourceSets.main.output
+    integrationTestsCompile configurations.testCompile
+    integrationTestsCompile sourceSets.test.output
+    integrationTestsRuntime configurations.testRuntime
+
+    endToEndTestsCompile sourceSets.main.output
+    endToEndTestsCompile configurations.testCompile
+    endToEndTestsCompile sourceSets.test.output
+    endToEndTestsRuntime configurations.testRuntime
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0'
+}
+
+task unitTests(type: Test) {
+    unitTests.testClassesDirs = sourceSets.unitTests.output.classesDirs
+    classpath = sourceSets.unitTests.runtimeClasspath
+}
+
+task integrationTests(type: Test) {
+    integrationTests.testClassesDirs = sourceSets.integrationTests.output.classesDirs
+    classpath = sourceSets.integrationTests.runtimeClasspath
+}
+
+task endToEndTests(type: Test) {
+    endToEndTests.testClassesDirs = sourceSets.endToEndTests.output.classesDirs
+    classpath = sourceSets.endToEndTests.runtimeClasspath
+}
